@@ -31,3 +31,17 @@ def get_customers():
     the_response.mimetype = 'application/json'
     return the_response
     
+# Get customer detail for customer with particular cust_id
+# [Steve-1]
+@customer.route('/customer/<cust_id>', methods=['GET'])
+def get_lfcustomer(cust_id): #NOTE: function name, "get_lfcustomer".
+    current_app.logger.info('GET /customer/<cust_ID> route')
+    cursor = db.get_db().cursor()
+    cursor.execute('select id, first_name, last_name, \
+    age, dob, address, email from customers where id = {0}'.format(cust_id))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+

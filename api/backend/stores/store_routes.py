@@ -28,3 +28,19 @@ def get_stores():
     the_response.mimetype = 'application/json'
     return the_response
     
+# Get customer detail for customer with particular store_id
+# 
+@stores.route('/stores/<store_id>', methods=['GET'])
+def get_store(store_id):
+    current_app.logger.info('GET /stores/<store_ID> route')
+    cursor = db.get_db().cursor()
+    #TODO: edit SQL to cater to various personas' user stories' 
+    cursor.execute('select id, name, phone \
+    from store where id = {0}'.format(store_id))  #in database, table = "store"
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+    
