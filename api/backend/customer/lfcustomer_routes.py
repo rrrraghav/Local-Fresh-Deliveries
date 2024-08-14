@@ -60,3 +60,37 @@ def get_lfcustomer_order(cust_id, order_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+'''
+#POST endpoint. [Steve 1.4, creating an order]
+@customer.route('/customer/<cust_id>/orders', methods= ['POST'])
+def post_lfcustomer_order(cust_id):
+    current_app.logger.info('GET /customer/<cust_id>/orders route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT o.id, o.delivery_address, o.time_created, o.time_fulfilled, d.first_name \
+    FROM orders o JOIN customers c ON o.customer_id = c.id \
+    JOIN driver d ON o.driver_id = d.id  \
+    WHERE c.id = {0} AND o.id = {1}'.format(cust_id, order_id))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+'''
+
+'''
+#GET endpoint. [Steve 1.4, viewing all orders]
+@customer.route('/customer/<cust_id>/orders', methods= ['GET'])
+def post_lfcustomer_order(cust_id):
+    current_app.logger.info('GET /customer/<cust_id>/orders/<order_id> route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT o.id, o.delivery_address, o.time_created, o.time_fulfilled, d.first_name \
+    FROM orders o JOIN customers c ON o.customer_id = c.id \
+    JOIN driver d ON o.driver_id = d.id  \
+    WHERE c.id = {0} AND o.id = {1}'.format(cust_id, order_id))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+'''
