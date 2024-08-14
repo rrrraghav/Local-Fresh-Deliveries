@@ -8,7 +8,8 @@ from backend.customers.customer_routes import customers #sample project northwin
 from backend.products.products_routes import products
 from backend.employees.employee_routes import employees
 from backend.stores.store_routes import stores
-from backend.customer.lfcustomer_routes import customer #local fresh customer 
+from backend.customer.lfcustomer_routes import customer #local fresh customer
+from backend.drivers.driver_routes import drivers
 
 
 import os
@@ -116,6 +117,7 @@ def create_app():
 
     
     app.register_blueprint(stores, url_prefix='/s')
+    app.register_blueprint(drivers, url_prefix='/d')
 
     # Don't forget to return the app object
     return app
