@@ -35,10 +35,25 @@ def get_customers():
 # [Steve-1]
 @customer.route('/customer/<cust_id>', methods=['GET'])
 def get_lfcustomer(cust_id): #NOTE: function name, "get_lfcustomer".
-    current_app.logger.info('GET /customer/<cust_ID> route')
+    current_app.logger.info('GET /customer/<cust_id> route')
     cursor = db.get_db().cursor()
     cursor.execute('select id, first_name, last_name, \
     age, dob, address, email from customers where id = {0}'.format(cust_id))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+#GET endpoint. [Steve 1.4, reading an order]
+@customer.route('/customer/<cust_id>/orders/<order_id>', methods= ['GET'])
+def get_lfcustomer_order(cust_id, order_id):
+    current_app.logger.info('GET /customer/<cust_id>/orders/<order_id> route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT o.id, o.delivery_address, o.time_created, o.time_fulfilled, d.first_name \
+    FROM orders o JOIN customers c ON o.customer_id = c.id \
+    JOIN driver d ON o.driver_id = d.id  \
+    WHERE c.id = {0} AND o.id = {1}'.format(cust_id, order_id))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200

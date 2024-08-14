@@ -127,7 +127,7 @@ VALUES ('John', 'Smith', 23, '2000-12-24', '123 Avery Ct, Juniper FL', 'johnsmit
 
 
 INSERT INTO orders (pickup_address, delivery_address, customer_id, store_id, driver_id, id)
-VALUES ('78 Computer Ln, New York NY','55 Building Rd, Pittsburgh PA', 989, 888, 123, 090),
+VALUES ('78 Computer Ln, New York NY','55 Building Rd, Pittsburgh PA', 989, 888, 123, 333),
 ('78 Computer Ln, New York NY','123 Avery Ct, Juniper FL', 333, 235, 789, 111);
 
 INSERT INTO category (id, name)
