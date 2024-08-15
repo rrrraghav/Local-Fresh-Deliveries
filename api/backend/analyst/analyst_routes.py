@@ -5,19 +5,44 @@ from backend.ml_models.model01 import predict
 
 analyst = Blueprint('analyst', __name__)
 '''
-Routes file for handling "driver" entity endpoints. 
-Handles user stories for Sally
+Routes file for handling "analyst" entity endpoints. 
+Handles user stories for Josh
 
 '''
 
+# get all driver information from DB
+@analyst.route('/analyst', methods=['GET'])
+def get_analysts():
+    current_app.logger.info('analyst_routes.py: GET /analyst')
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from analyst')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# get a specific driver's informaion
+@analyst.route('/analyst/<analyst_id>', methods=['GET'])
+def get_analyst_info(id):
+    current_app.logger.info('analyst_routes.py: GET /analyst')
+    cursor = db.get_db().cursor()
+    cursor.execute('select * \
+                   from analyst where id = %s', id)
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # get a specific stores sales data
 @analyst.route('/analyst/<analyst_id>/stores/<id>/sales_data', methods=['GET'])
-def get_store_data():
+def get_store_data(store_id):
     current_app.logger.info('analyst_routes.py: GET /analyst')
     cursor = db.get_db().cursor()
     cursor.execute('select s.name, p.name, p.units_in_stock, p.price \
-                    from products p join store s on \
-                    where p.id = %s',)
+                   from product p join store s on p.store_id = s.id \
+                   where store_id = %s', store_id)
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
