@@ -55,31 +55,34 @@ if st.button("Act as Steve, a Customer",
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
     logger.info("Logging in as Customer")
-    st.switch_page('pages/00_Customer.py')
-
-if st.button('Act as Max, a Fisherman', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'stores'
-    st.session_state['first_name'] = 'Max'
-    st.switch_page('pages/10_Store.py')
-
-if st.button('Act as Sally, a Driver', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'driver'
-    st.session_state['first_name'] = 'Sally'
-    st.switch_page('pages/20_driver.py')
+    st.switch_page('pages/00_Customer_Home.py')
 
 if st.button('Act as Josh, a Data Analyst', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'analyst'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/30_Admin_Home.py')
+    st.session_state['first_name'] = 'Josh'
+    logger.info('Logging in as analyst')
+    st.switch_page('pages/10_Analyst_Home.py')
+
+if st.button('Act as Max, a Fisherman', 
+            type = 'primary', 
+            use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'store'
+    st.session_state['first_name'] = 'Max'
+    logger.info('Logging in as store')
+    st.switch_page('pages/20_Store_Home.py')
+
+if st.button('Act as Sally, a Delivery Driver', 
+            type = 'primary', 
+            use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'driver'
+    st.session_state['first_name'] = 'Sally'
+    logger.info('Logging in as driver')
+    st.switch_page('pages/30_Driver_Home.py')
 
 
 

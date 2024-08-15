@@ -7,9 +7,9 @@ def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon='🏠')
 
 def AboutPageNav():
-    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+    st.sidebar.page_link("pages/40_About.py", label="About", icon="🧠")
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
+#### ------------------------ Examples for Role of customer ------------------------
 def PolStratAdvHomeNav():
     st.sidebar.page_link("pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon='👤')
 
@@ -19,7 +19,7 @@ def WorldBankVizNav():
 def MapDemoNav():
     st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon='🗺️')
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
+## ------------------------ Examples for Role of analyst ------------------------
 def ApiTestNav():
     st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon='🛜')
 
@@ -29,11 +29,26 @@ def PredictionNav():
 def ClassificationNav():
     st.sidebar.page_link("pages/13_Classification.py", label="Classification Demo", icon='🌺')
 
-#### ------------------------ System Admin Role ------------------------
+#### ------------------------ Store Role ------------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon='🖥️')
     st.sidebar.page_link("pages/21_ML_Model_Mgmt.py", label='ML Model Management', icon='🏢')
 
+#### ------------------------ Driver Role ------------------------
+def DriverHomeNav():
+    st.sidebar.page_link("pages/30_Driver_Home.py", label="Driver Home", icon='🖥️')
+
+def UpdateInfoNav():
+    st.sidebar.page_link("pages/31_Update_Info.py", label="Driver Home", icon='🖥️')
+
+def ViewOrdersNav():
+    st.sidebar.page_link("pages/32_View_Orders.py", label="Driver Home", icon='🖥️')
+
+def CompletedDeliveryNav():
+    st.sidebar.page_link("pages/33_Completed_Delivery.py", label="Driver Home", icon='🖥️')
+
+def ViewOrderCostNav():
+    st.sidebar.page_link("pages/34_View_Order_Cost.py", label="Driver Home", icon='🖥️')
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -71,6 +86,14 @@ def SideBarLinks(show_home=False):
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state['role'] == 'administrator':
             AdminPageNav()
+
+        # If the user is a driver, give them access to the driver pages
+        if st.session_state['role'] == 'driver':
+            DriverHomeNav()
+            UpdateInfoNav()
+            ViewOrdersNav()
+            CompletedDeliveryNav()
+            ViewOrderCostNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
