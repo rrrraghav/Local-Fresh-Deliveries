@@ -4,41 +4,13 @@ from backend.db_connection import db
 from backend.ml_models.model01 import predict
 
 drivers = Blueprint('drivers', __name__)
-'''
-Routes file for handling "driver" entity endpoints. 
-Handles user stories for Sally
 
-'''
-
-'''
-TODO: finish driver endpoints
-# Get all stores from the DB
-@drivers.route('/drivers', methods=['GET'])
-def get_stores():
-    
-    current_app.logger.info('driver_routes.py: GET /drivers')
-    cursor = db.get_db().cursor()
-    cursor.execute('select id, name, phone \
-        from store')
-    # row_headers = [x[0] for x in cursor.description]
-    # json_data = []
-    theData = cursor.fetchall()
-    # for row in theData:
-    #     json_data.append(dict(zip(row_headers, row)))
-    # the_response = make_response(jsonify(json_data))
-    the_response = make_response(theData)
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-    
-'''
-
-# get all drivers from DB
+# get all driver information from DB
 @drivers.route('/drivers', methods=['GET'])
 def get_drivers():
     current_app.logger.info('driver_routes.py: GET /drivers')
     cursor = db.get_db().cursor()
-    cursor.execute('select id, first_name, last_name from driver')
+    cursor.execute('select * from driver')
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -50,7 +22,7 @@ def get_drivers():
 def get_driver_info(id):
     current_app.logger.info('driver_routes.py: GET /drivers')
     cursor = db.get_db().cursor()
-    cursor.execute('select id, first_name, last_name \
+    cursor.execute('select * \
                    from driver where id = %s', id)
     theData = cursor.fetchall()
     the_response = make_response(theData)
@@ -101,8 +73,21 @@ def update_order_info(id, order_id):
     db.get_db().commit()
     return 'order updated'
 
-''''
-TODO: create a route for Sally-2 ->
-    As Sally, I want to see the total cost of each delivery I completed and update the status of a delivery when it’s completed.
-    Get request with a lot of joins connecting driver to product
-'''
+# get total cost of a particular order
+@drivers.route('/drivers/<id>/orders/<order_id>', methods=['GET'])
+def get_order_cost(id, order_id):
+    cursor = db.get_db().cursor()
+    query = '''
+        select o.id, Sum(op.quantity * p.price) as order_cost \
+        from driver d join orders o on d.id = o.driver_id \
+        join orders_product op on o.id = op.orders_id \
+        join product p on op.product_id = p.id \
+        where o.id = %s and d.id = %s \
+        group by o.id
+    '''
+    cursor.execute(query, (order_id, id))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
