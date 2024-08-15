@@ -43,4 +43,17 @@ def get_store(store_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-    
+# Get all products sold at a given Local Fresh store
+#
+@stores.route('/stores/<store_id>/products', methods=['GET'])
+def get_store_products(store_id):
+    current_app.logger.info('GET /stores/<store_ID>/products route')
+    cursor = db.get_db().cursor()
+    cursor.execute('select s.name, p.name, p.units_in_stock, p.price \
+                   from product p join store s on p.store_id = s.id \
+                   where store_id = %s', store_id)
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
