@@ -145,6 +145,6 @@ VALUES (1, 'Whole Foods', 1243675899);
 INSERT INTO product (store_id, name, price, units_in_stock, category_id)
 VALUES (1, 'Fresh Sirloin Steak', 20, 3, 235),
        (235, 'Fresh Shrimp', 8, 8, 235),
-       (888, 'Fresh Farm Eggs', 15, 4, 235),
+       (235, 'Fresh Farm Eggs', 15, 4, 235),
        (235, 'Fresh Uni', 13, 10, 235);
 

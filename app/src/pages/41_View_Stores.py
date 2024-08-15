@@ -26,7 +26,7 @@ def show_products(store_id, store_name):
         products_data = requests.get('http://api:4000/s/stores/{0}/products'.format(store_id)).json()
         st.dataframe(products_data)
     except:
-        st.write("**Important**: Could not retrieve data for products.")
+        st.write("No products available for this store.")
         products_data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
     
 
