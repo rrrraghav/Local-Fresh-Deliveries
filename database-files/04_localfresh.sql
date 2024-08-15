@@ -827,3 +827,10 @@ insert into store_emails (id, email) values ('30', 'mduffet2o@imgur.com');
 insert into store_emails (id, email) values ('27', 'lbischoff2p@census.gov');
 insert into store_emails (id, email) values ('21', 'oscoles2q@bandcamp.com');
 insert into store_emails (id, email) values ('33', 'hbrokenshaw2r@nih.gov');
+
+select o.id, Sum(op.quantity * p.price)
+        from driver d join orders o on d.id = o.driver_id
+        join orders_product op on o.id = op.orders_id
+        join product p on op.product_id = p.id
+        where o.id = 30 and d.id = 1
+        group by o.id
