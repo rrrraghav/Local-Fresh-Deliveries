@@ -10,6 +10,7 @@ from backend.employees.employee_routes import employees
 from backend.stores.store_routes import stores
 from backend.customer.lfcustomer_routes import customer #local fresh customer
 from backend.drivers.driver_routes import drivers
+from backend.analyst.analyst_routes import analyst
 
 
 import os
@@ -114,10 +115,9 @@ def create_app():
     - Folder for this persona is also called "customer" currently
     '''
     app.register_blueprint(customer, url_prefix='/cl') # Steve/customers
-
-    
     app.register_blueprint(stores, url_prefix='/s')
     app.register_blueprint(drivers, url_prefix='/d')
+    app.register_blueprint(analyst,     url_prefix='/a')
 
     # Don't forget to return the app object
     return app
