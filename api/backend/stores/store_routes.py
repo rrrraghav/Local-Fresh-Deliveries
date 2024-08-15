@@ -43,4 +43,20 @@ def get_store(store_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# Retrieve all products available at a store 
+@stores.route('/stores/<store_id>/products', methods=['GET'])
+def get_store_products(store_id):
+    current_app.logger.info('GET /stores/<store_ID>/products route')
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT p.name, p.units_in_stock, p.price, c.name \
+    FROM product p JOIN category c ON p.category_id = c.id \
+    JOIN store s ON p.store_id = s.id \
+    WHERE s.id = {0} \
+    '.format(store_id))  #in database, table = "store". also need "and units_in_stock > 0"
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
     

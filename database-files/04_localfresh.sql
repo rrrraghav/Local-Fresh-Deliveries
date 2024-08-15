@@ -4,6 +4,13 @@ create database if not exists localfresh;
 
 use localfresh;
 
+create table if not exists store (
+  id integer auto_increment,
+  name varchar(255) not null,
+  phone bigint unique not null,
+  primary key (id)
+);
+
 create table if not exists customers (
   id integer auto_increment,
   first_name varchar(255) not null,
@@ -12,7 +19,11 @@ create table if not exists customers (
   dob datetime,
   address varchar(255) not null,
   email varchar(255) not null,
-  primary key (id)
+  current_store integer, # represents the store the customer is currently viewing
+  primary key (id),
+  foreign key (current_store) references store(id)
+    on update restrict on delete restrict
+
 );
 
 create table if not exists customer_addresses (
@@ -30,12 +41,7 @@ create table if not exists driver (
   primary key (id)
 );
 
-create table if not exists store (
-  id integer auto_increment,
-  name varchar(255) not null,
-  phone bigint unique not null,
-  primary key (id)
-);
+
 
 create table if not exists orders (
   id integer auto_increment,
@@ -122,7 +128,7 @@ VALUES ('Max\'s Fish Market', 1234567891, 235),
 	   ('Bill\'s Local Farm', 6578904324, 888);
 
 INSERT INTO customers (first_name, last_name, age, dob, address, email, id)
-VALUES ('John', 'Smith', 23, '2000-12-24', '123 Avery Ct, Juniper FL', 'johnsmith@gmail.com', 333),
+VALUES ('Steve', 'Smith', 23, '2000-12-24', '123 Avery Ct, Juniper FL', 'johnsmith@gmail.com', 333),
        ('Emily', 'Doe', 26, '1997-11-02', '55 Building Rd, Pittsburgh PA', 'emilydoe@gmail.com', 989);
 
 
@@ -137,6 +143,8 @@ INSERT INTO store (id, name, phone)
 VALUES (1, 'Whole Foods', 1243675899);
 
 INSERT INTO product (store_id, name, price, units_in_stock, category_id)
-VALUES (1, 'Fresh Salmon', 10, 1, 235),
-       (1, 'Fresh Halibut', 15, 2, 235);
+VALUES (1, 'Fresh Sirloin Steak', 20, 3, 235),
+       (235, 'Fresh Shrimp', 8, 8, 235),
+       (888, 'Fresh Farm Eggs', 15, 4, 235),
+       (235, 'Fresh Uni', 13, 10, 235);
 

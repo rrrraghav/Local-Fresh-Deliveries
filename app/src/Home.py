@@ -3,10 +3,14 @@
 # sample application for your project
 ##################################################
 
+
+
 # Set up basic logging infrastructure
 import logging
 logging.basicConfig(format='%(filename)s:%(lineno)s:%(levelname)s -- %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
 
 # import the main streamlit library as well
 # as SideBarLinks function from src/modules folder
@@ -79,5 +83,9 @@ if st.button('Act as Steve, a Local Fresh Customer',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'customer'
     st.session_state['first_name'] = 'Steve'
+    # SETTING SESSION STATE VARIABLE TO CORRESPOND TO SAMPLE STEVE PERSONA DATA
+    st.session_state['customer_id'] = 333 #sample insert has id 333
+    # can put post request here to make customer for Steve
+    
     st.switch_page('pages/40_Customer_Home.py')
 

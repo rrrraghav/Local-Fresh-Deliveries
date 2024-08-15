@@ -1,7 +1,10 @@
 from flask import Blueprint, request, jsonify, make_response, current_app
 import json
+import logging
+logger = logging.getLogger(__name__)
 from backend.db_connection import db
 from backend.ml_models.model01 import predict
+
 
 customer = Blueprint('customer', __name__)
 '''
@@ -59,6 +62,27 @@ def get_lfcustomer_order(cust_id, order_id):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
+@customer.route('/customer/current_store/<store_id>/<cust_id>', methods=['PUT'])
+def put_customer_current_store(store_id, cust_id):
+    current_app.logger.info('PUT /customer/current_store/<store_id>/<cust_id> route')
+    cursor = db.get_db().cursor()
+    cursor.execute('UPDATE customers SET current_store = {0} \
+    WHERE id = {1}'.format(store_id, cust_id))
+
+     # executing and committing the insert statement 
+   # cursor.execute(query)
+    db.get_db().commit()
+    return 'Success!'
+    '''
+    #returning updated row for debugging
+    cursor.execute('select id, name, current_store from customers where id = {0}'.format(cust_id))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+    '''
 
 '''
 #POST endpoint. [Steve 1.4, creating an order]
