@@ -63,6 +63,10 @@ def get_lfcustomer_order(cust_id, order_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+
+
+
+
 @customer.route('/customer/current_store/<store_id>/<cust_id>', methods=['PUT'])
 def put_customer_current_store(store_id, cust_id):
     current_app.logger.info('PUT /customer/current_store/<store_id>/<cust_id> route')

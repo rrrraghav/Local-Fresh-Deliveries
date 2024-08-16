@@ -113,11 +113,9 @@ create table if not exists orders_product (
   foreign key (product_id) references product(id) on update cascade on delete restrict
 );
 
+# MOCKAROO SAMPLE DATA:
 
-#basic sample data for initial testing.
-#TODO: add mockaroo data below or in new file, sequentially lower (e.g. 05_sampledata.sql)
-
-insert into customers (id, first_name, last_name, email, age, dob, address) values (1, 'Randa', 'Wolpert', 'rwolpert0@edublogs.org', 14, '1994-12-06', '35 Hauk Crossing');
+insert into customers (id, first_name, last_name, email, age, dob, address) values (1, 'Steve', 'Steve', 'stevesteve@edublogs.org', 14, '1994-12-06', '35 Stevens Crossing');
 insert into customers (id, first_name, last_name, email, age, dob, address) values (2, 'Avie', 'Simcoe', 'asimcoe1@multiply.com', 26, '2004-05-11', '177 Erie Avenue');
 insert into customers (id, first_name, last_name, email, age, dob, address) values (3, 'Zaria', 'Howman', 'zhowman2@dell.com', 1, '1982-06-04', '95304 Cascade Lane');
 insert into customers (id, first_name, last_name, email, age, dob, address) values (4, 'Adriane', 'Zorzi', 'azorzi3@admin.ch', 3, '2015-05-07', '75 Sachs Hill');
