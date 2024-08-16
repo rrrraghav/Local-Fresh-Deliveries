@@ -837,33 +837,9 @@ select o.id, Sum(op.quantity * p.price)
         join orders_product op on o.id = op.orders_id
         join product p on op.product_id = p.id
         where o.id = 30 and d.id = 1
-        group by o.id
-INSERT INTO driver (first_name, last_name, vehicle_type, id)
-VALUES ('Bob', 'Fuller', 'Car', 789),
-	   ('Jane', 'Smith', 'Bike', 123);
+        group by o.id;
 
-INSERT INTO store (name, phone, id)
-VALUES ('Max\'s Fish Market', 1234567891, 235),
-	   ('Bill\'s Local Farm', 6578904324, 888);
 
 INSERT INTO customers (first_name, last_name, age, dob, address, email, id)
-VALUES ('Steve', 'Smith', 23, '2000-12-24', '123 Avery Ct, Juniper FL', 'johnsmith@gmail.com', 333),
+VALUES ('Steve', 'Smith', 23, '2000-12-24', '123 Avery Ct, Juniper FL', 'johnsmith@gmail.com', 333), #customer persona
        ('Emily', 'Doe', 26, '1997-11-02', '55 Building Rd, Pittsburgh PA', 'emilydoe@gmail.com', 989);
-
-
-INSERT INTO orders (pickup_address, delivery_address, customer_id, store_id, driver_id, id)
-VALUES ('78 Computer Ln, New York NY','55 Building Rd, Pittsburgh PA', 989, 888, 123, 333),
-('78 Computer Ln, New York NY','123 Avery Ct, Juniper FL', 333, 235, 789, 111);
-
-INSERT INTO category (id, name)
-VALUES (235, 'Fresh Fish');
-
-INSERT INTO store (id, name, phone)
-VALUES (1, 'Whole Foods', 1243675899);
-
-INSERT INTO product (store_id, name, price, units_in_stock, category_id)
-VALUES (1, 'Fresh Sirloin Steak', 20, 3, 235),
-       (235, 'Fresh Shrimp', 8, 8, 235),
-       (235, 'Fresh Farm Eggs', 15, 4, 235),
-       (235, 'Fresh Uni', 13, 10, 235);
-
