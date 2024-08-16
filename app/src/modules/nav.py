@@ -38,20 +38,17 @@ def AdminPageNav():
 def DriverHomeNav():
     st.sidebar.page_link("pages/30_Driver_Home.py", label="Driver Home", icon='🖥️')
 
-def UpdateInfoNav():
-    st.sidebar.page_link("pages/31_Update_Info.py", label="Driver Home", icon='🖥️')
-
 def ViewOrdersNav():
-    st.sidebar.page_link("pages/32_View_Orders.py", label="Driver Home", icon='🖥️')
+    st.sidebar.page_link("pages/31_View_Orders.py", label="View past deliveries", icon='🖥️')
 
 def CompletedDeliveryNav():
-    st.sidebar.page_link("pages/33_Completed_Delivery.py", label="Driver Home", icon='🖥️')
+    st.sidebar.page_link("pages/32_Completed_Delivery.py", label="Log a completed delivery", icon='🖥️')
 
 def ViewOrderCostNav():
-    st.sidebar.page_link("pages/34_View_Order_Cost.py", label="Driver Home", icon='🖥️')
+    st.sidebar.page_link("pages/33_View_Order_Cost.py", label="View an order's cost", icon='🖥️')
 
 # --------------------------------Links Function -----------------------------------------------
-def SideBarLinks(show_home=False):
+def SideBarLinks(show_home=True):
     """
     This function handles adding links to the sidebar of the app based upon the logged-in user's role, which was put in the streamlit session_state object when logging in. 
     """    
@@ -90,7 +87,6 @@ def SideBarLinks(show_home=False):
         # If the user is a driver, give them access to the driver pages
         if st.session_state['role'] == 'driver':
             DriverHomeNav()
-            UpdateInfoNav()
             ViewOrdersNav()
             CompletedDeliveryNav()
             ViewOrderCostNav()
