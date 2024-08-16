@@ -14,6 +14,17 @@ st.write('')
 st.write('')
 st.write('### Select a store to view its products')
 products_data = {}
+
+# Creates an order and adds the first product
+def create_order(store_id, prod_id, quantity):
+   order_data = {}
+   order_data['customer_id'] = st.session_state['customer_id']
+   order_data['store_id'] = store_id
+   order_data['product_id'] = prod_id
+   order_data['quantity'] = quantity
+   st.session_state['has_order'] = True
+   st.session_state['current_order_id'] = requests.post("http://api:4000/cl/customer/orders", json=order_data)
+
 def show_products(store_id, store_name):
     clicked = True # TODO use this var for another func to "close" avail products on second click
     
@@ -22,8 +33,40 @@ def show_products(store_id, store_name):
     st.write('')
     # TODO st.write('### Select a product to order(?)')
     try:
+        # Showing each product
         products_data = requests.get('http://api:4000/s/stores/{0}/products'.format(store_id)).json()
-        st.dataframe(products_data)
+        for product in products_data:
+          #st.dataframe(product)
+        #  st.write(product['units_in_stock'] + 4)
+          '''
+          if st.button(product['p_name'] + " , $" + product['price'] , use_container_width=True): 
+            
+            st.write("button works")
+          '''
+          # Setting up Order Form (order POST)
+          with st.form("Order Form"):
+              st.write(product['p_name'] + ' , $' + product['price'])
+          #st.write(product['name'] + "  $" + ", " + product['units_in_stock'] + " left")
+              amount_ordered = st.number_input("Select Amount to Order:", min_value=0, max_value=product['units_in_stock'], \
+              step=1)
+              submitted = st.form_submit_button("Submit")
+
+              '''
+              if submitted:
+                if not st.session_state['has_order'] :
+                  # create order + add to order
+                  create_order(store_id, product['id'], product['quantity'])
+                else:
+                  # add to existing order
+                    
+                  order_data = {}
+                  order_data['product_id'] = product['id']
+                  order_data['order_id'] = st.session_state['current_order_id']
+                  order_data['quantity'] = amount_ordered
+                  requests.post("http://api:4000/cl/customer/orders/addToOrder".format(), json=order_data)
+              '''
+                  
+
     except:
         st.write("No products available for this store.")
         products_data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}

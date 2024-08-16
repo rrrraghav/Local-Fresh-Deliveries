@@ -49,7 +49,7 @@ create table if not exists orders (
   delivery_address varchar(255) not null,
   customer_id integer not null,
   store_id integer not null,
-  driver_id integer not null,
+  driver_id integer , # starts as null until driver is found, then updated
   primary key (id),
   foreign key (customer_id) references customers(id) on update cascade on delete cascade,
   foreign key (store_id) references store(id) on update cascade on delete restrict,
@@ -316,8 +316,8 @@ insert into product (id, name, units_in_stock, price, store_id, category_id) val
 insert into product (id, name, units_in_stock, price, store_id, category_id) values (36, 'Lentils - Red, Dry', 59, 548.62, '29', '5');
 insert into product (id, name, units_in_stock, price, store_id, category_id) values (37, 'Paper - Brown Paper Mini Cups', 44, 1762.5, '27', '7');
 insert into product (id, name, units_in_stock, price, store_id, category_id) values (38, 'Schnappes Peppermint - Walker', 6, 1406.27, '21', '1');
-insert into product (id, name, units_in_stock, price, store_id, category_id) values (39, 'Sauce - Chili', 53, 215.43, '5', '8');
-insert into product (id, name, units_in_stock, price, store_id, category_id) values (40, 'Oil - Sunflower', 85, 1873.37, '25', '4');
+insert into product (id, name, units_in_stock, price, store_id, category_id) values (39, 'Sauce - Chili', 53, 215.43, '1', '8');
+insert into product (id, name, units_in_stock, price, store_id, category_id) values (40, 'Oil - Sunflower', 85, 1873.37, '1', '4');
 
 insert into orders (id, time_created, time_fulfilled, pickup_address, delivery_address, customer_id, store_id, driver_id) values (1, '2024-01-29', '2024-07-07', '44 Comanche Trail', '64 Chive Center', '10', '11', 23);
 insert into orders (id, time_created, time_fulfilled, pickup_address, delivery_address, customer_id, store_id, driver_id) values (2, '2024-05-18', '2024-07-16', '31099 Memorial Way', '0969 Iowa Parkway', '8', '33', 5);
