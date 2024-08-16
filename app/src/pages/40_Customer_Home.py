@@ -23,3 +23,9 @@ if st.button('Your Profile',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/42_Customer_Profile.py')
+
+
+if st.button('View Orders', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/43_View_Orders.py')

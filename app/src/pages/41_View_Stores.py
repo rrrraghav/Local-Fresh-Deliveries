@@ -31,8 +31,6 @@ def show_products(store_id, store_name):
 
     
 
-
-
 data = {}
 try:
   data = requests.get('http://api:4000/s/stores').json()

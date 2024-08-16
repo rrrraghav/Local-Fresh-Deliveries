@@ -53,10 +53,13 @@ def get_lfcustomer(cust_id): #NOTE: function name, "get_lfcustomer".
 def get_lfcustomer_order(cust_id, order_id):
     current_app.logger.info('GET /customer/<cust_id>/orders/<order_id> route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT o.id, o.delivery_address, o.time_created, o.time_fulfilled, d.first_name \
+    cursor.execute('SELECT o.id AS order_id, o.delivery_address, o.time_created, o.time_fulfilled, s.name AS store_name \
+    , d.first_name AS d_name \
     FROM orders o JOIN customers c ON o.customer_id = c.id \
-    JOIN driver d ON o.driver_id = d.id  \
-    WHERE c.id = {0} AND o.id = {1}'.format(cust_id, order_id))
+    JOIN store s on o.store_id = s.id \
+    JOIN driver d ON o.driver_id = d.id \
+    WHERE c.id = {0} AND o.id = {1}  \
+    '.format(cust_id, order_id))
     theData = cursor.fetchall()
     the_response = make_response(theData)
     the_response.status_code = 200
@@ -68,7 +71,7 @@ def get_lfcustomer_order(cust_id, order_id):
 def get_all_lfcustomer_order(cust_id):
     current_app.logger.info('GET /customer/<cust_id>/orders/ route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT o.id, o.delivery_address, o.time_created, o.time_fulfilled, d.first_name \
+    cursor.execute('SELECT o.id AS order_id, o.delivery_address, o.time_created, o.time_fulfilled, d.first_name AS d_name\
     FROM orders o JOIN customers c ON o.customer_id = c.id \
     JOIN driver d ON o.driver_id = d.id  \
     WHERE c.id = {0}'.format(cust_id))

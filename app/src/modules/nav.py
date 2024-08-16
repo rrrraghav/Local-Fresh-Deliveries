@@ -23,12 +23,12 @@ def MapDemoNav():
 LOCAL FRESH PAGES:
 '''
 def CustomerHomeNav():
-    st.sidebar.page_link("pages/40_Customer_Home.py", label="Customer Home", icon='😛')
+    st.sidebar.page_link("pages/40_Customer_Home.py", label="Home", icon='😛')
 def CustomerCreateOrderNav():
-    st.sidebar.page_link("pages/41_Customer_View_Stores.py", label="View Available Stores", icon='🏪')
+    st.sidebar.page_link("pages/41_View_Stores.py", label="View Stores", icon='🏪')
 
-
-# TODO: Store & Driver Homepages 
+def CustomerViewOrdersNav():
+    st.sidebar.page_link("pages/43_View_Orders.py", label="View Orders", icon='📜')
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
 def ApiTestNav():
@@ -108,6 +108,8 @@ def SideBarLinks(show_home=False):
 
         if st.session_state['role'] == 'customer':
             CustomerHomeNav()
+            CustomerCreateOrderNav()
+            CustomerViewOrdersNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
