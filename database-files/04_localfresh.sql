@@ -4,6 +4,13 @@ create database if not exists localfresh;
 
 use localfresh;
 
+create table if not exists store (
+  id integer auto_increment,
+  name varchar(255) not null,
+  phone bigint unique not null,
+  primary key (id)
+);
+
 create table if not exists customers (
   id integer auto_increment,
   first_name varchar(255) not null,
@@ -13,6 +20,8 @@ create table if not exists customers (
   address varchar(255) not null,
   email varchar(255) not null,
   primary key (id)
+
+
 );
 
 create table if not exists customer_addresses (
@@ -30,12 +39,7 @@ create table if not exists driver (
   primary key (id)
 );
 
-create table if not exists store (
-  id integer auto_increment,
-  name varchar(255) not null,
-  phone bigint unique not null,
-  primary key (id)
-);
+
 
 create table if not exists orders (
   id integer auto_increment,
@@ -109,11 +113,9 @@ create table if not exists orders_product (
   foreign key (product_id) references product(id) on update cascade on delete restrict
 );
 
+# MOCKAROO SAMPLE DATA:
 
-#basic sample data for initial testing.
-#TODO: add mockaroo data below or in new file, sequentially lower (e.g. 05_sampledata.sql)
-
-insert into customers (id, first_name, last_name, email, age, dob, address) values (1, 'Randa', 'Wolpert', 'rwolpert0@edublogs.org', 14, '1994-12-06', '35 Hauk Crossing');
+insert into customers (id, first_name, last_name, email, age, dob, address) values (1, 'Steve', 'Steve', 'stevesteve@edublogs.org', 14, '1994-12-06', '35 Stevens Crossing');
 insert into customers (id, first_name, last_name, email, age, dob, address) values (2, 'Avie', 'Simcoe', 'asimcoe1@multiply.com', 26, '2004-05-11', '177 Erie Avenue');
 insert into customers (id, first_name, last_name, email, age, dob, address) values (3, 'Zaria', 'Howman', 'zhowman2@dell.com', 1, '1982-06-04', '95304 Cascade Lane');
 insert into customers (id, first_name, last_name, email, age, dob, address) values (4, 'Adriane', 'Zorzi', 'azorzi3@admin.ch', 3, '2015-05-07', '75 Sachs Hill');
@@ -833,4 +835,9 @@ select o.id, Sum(op.quantity * p.price)
         join orders_product op on o.id = op.orders_id
         join product p on op.product_id = p.id
         where o.id = 30 and d.id = 1
-        group by o.id
+        group by o.id;
+
+
+INSERT INTO customers (first_name, last_name, age, dob, address, email, id)
+VALUES ('Steve', 'Smith', 23, '2000-12-24', '123 Avery Ct, Juniper FL', 'johnsmith@gmail.com', 333), #customer persona
+       ('Emily', 'Doe', 26, '1997-11-02', '55 Building Rd, Pittsburgh PA', 'emilydoe@gmail.com', 989);

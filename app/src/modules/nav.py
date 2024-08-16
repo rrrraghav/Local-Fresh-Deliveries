@@ -19,7 +19,18 @@ def WorldBankVizNav():
 def MapDemoNav():
     st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon='🗺️')
 
-## ------------------------ Examples for Role of analyst ------------------------
+'''
+LOCAL FRESH PAGES:
+'''
+def CustomerHomeNav():
+    st.sidebar.page_link("pages/40_Customer_Home.py", label="Customer Home", icon='😛')
+def CustomerCreateOrderNav():
+    st.sidebar.page_link("pages/41_Customer_View_Stores.py", label="View Available Stores", icon='🏪')
+
+
+# TODO: Store & Driver Homepages 
+
+## ------------------------ Examples for Role of usaid_worker ------------------------
 def ApiTestNav():
     st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon='🛜')
 
@@ -90,6 +101,9 @@ def SideBarLinks(show_home=True):
             ViewOrdersNav()
             CompletedDeliveryNav()
             ViewOrderCostNav()
+
+        if st.session_state['role'] == 'customer':
+            CustomerHomeNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()

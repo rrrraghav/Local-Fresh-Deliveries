@@ -3,10 +3,14 @@
 # sample application for your project
 ##################################################
 
+
+
 # Set up basic logging infrastructure
 import logging
 logging.basicConfig(format='%(filename)s:%(lineno)s:%(levelname)s -- %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
 
 # import the main streamlit library as well
 # as SideBarLinks function from src/modules folder
@@ -47,15 +51,12 @@ if st.button("Act as Steve, a Customer",
             use_container_width=True):
     # when user clicks the button, they are now considered authenticated
     st.session_state['authenticated'] = True
-    # we set the role of the current user
     st.session_state['role'] = 'customer'
-    # we add the first name of the user (so it can be displayed on 
-    # subsequent pages). 
-    st.session_state['first_name'] = 'Steve'
-    # finally, we ask streamlit to switch to another page, in this case, the 
-    # landing page for this particular user type
+    st.session_state['first_name'] = 'Steve' 
+    st.session_state['customer_id'] = 1 # Sample insert Steve persona id
+    
     logger.info("Logging in as Customer")
-    st.switch_page('pages/00_Customer_Home.py')
+    st.switch_page('pages/40_Customer_Home.py')
 
 if st.button('Act as Josh, a Data Analyst', 
             type = 'primary', 
