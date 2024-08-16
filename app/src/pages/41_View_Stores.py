@@ -9,7 +9,6 @@ SideBarLinks()
 
 
 clicked = False
-#current_store_name = ''
 st.title("Available Local Fresh Stores")
 st.write('')
 st.write('')

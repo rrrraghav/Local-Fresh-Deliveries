@@ -19,10 +19,8 @@ create table if not exists customers (
   dob datetime,
   address varchar(255) not null,
   email varchar(255) not null,
-  current_store integer, # represents the store the customer is currently viewing
-  primary key (id),
-  foreign key (current_store) references store(id)
-    on update restrict on delete restrict
+  primary key (id)
+
 
 );
 
