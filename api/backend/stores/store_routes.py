@@ -60,3 +60,39 @@ def get_store_products(store_id):
     return the_response
 
 
+# Get details of single product sold at a given Local Fresh store
+#
+@stores.route('/stores/<store_id>/products/<product_id>', methods=['GET'])
+def get_product_details(store_id, product_id):
+    current_app.logger.info('GET /stores/<store_ID>/products/<product_id> route')
+    cursor = db.get_db().cursor()
+    cursor.execute('select p.name, p.units_in_stock, p.price \
+                   from product p join store s on p.store_id = s.id \
+                   where p.store_id = %s and p.id = %s', (store_id, product_id))
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# Update the price and units in stock of a product at a particular store
+#
+@stores.route('/stores/<store_id>/products/<product_id>', methods=['PUT'])
+def update_product_detail(store_id, product_id):
+    current_app.logger.info('store_routes.py: PUT /stores/<store_id>/products/<product_id>')
+    product_info = request.json
+    price = product_info['price']
+    units = product_info['units_in_stock']
+    
+    query = 'update product set price = %s, units_in_stock = %s \
+        where product_id = %s and store_id = %s'
+    data = (price, units, product_id, store_id)
+    cursor = db.get_db().cursor()
+    r = cursor.execute(query, data)
+    db.get_db().commit()
+    return 'product details updated'
+
+# Add a new product to a particular store
+#
+#@stores.route('/stores/<store_id>/products/<product_id>', methods=['POST'])
+#def add_product(store_id, product_id):
