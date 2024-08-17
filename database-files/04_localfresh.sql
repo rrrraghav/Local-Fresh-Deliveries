@@ -110,7 +110,7 @@ create table if not exists orders_product (
   quantity integer not null,
   primary key (orders_id, product_id),
   foreign key (orders_id) references orders(id) on update cascade on delete restrict,
-  foreign key (product_id) references product(id) on update cascade on delete restrict
+  foreign key (product_id) references product(id) on update cascade on delete cascade
 );
 
 # MOCKAROO SAMPLE DATA:
