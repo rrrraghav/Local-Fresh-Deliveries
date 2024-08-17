@@ -95,9 +95,22 @@ def update_product_detail(store_id):
 
 # Add a new product to a particular store
 #
-'''
-@stores.route('/stores/<store_id>/products/<product_id>', methods=['POST'])
-def add_product(store_id, product_id):
+@stores.route('/stores/<store_id>/products', methods=['POST'])
+def add_product(store_id):
     current_app.logger.info('store_routes.py: POST /stores/<store_id>/products')
     product_info = request.json
-'''
+
+    category_id = product_info['category_id']
+    name = product_info['name']
+    price = product_info['price']
+    units = product_info['units_in_stock']
+
+    query = 'insert into product (name, units_in_stock, price, store_id, category_id) \
+        values (%s, %s, %s, %s, %s)'
+    
+    data = (name, units, price, store_id, category_id)
+    cursor = db.get_db().cursor()
+    r = cursor.execute(query, data)
+    db.get_db().commit()
+    return 'product details updated'
+
