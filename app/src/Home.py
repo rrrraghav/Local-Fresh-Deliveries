@@ -79,6 +79,7 @@ if st.button('Act as Max, a Fisherman',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'store'
     st.session_state['first_name'] = 'Max'
+    
     logger.info('Logging in as store')
     st.switch_page('pages/20_Store_Home.py')
 

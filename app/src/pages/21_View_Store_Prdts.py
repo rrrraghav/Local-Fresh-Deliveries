@@ -71,6 +71,33 @@ with st.form("Update your product information:"):
         else:
           st.error(f"Failed to update product: {response.text}")
 
+with st.form("Delete a Product"):
+    product_id_str = st.text_input("Product to Delete (Product ID)")
+    submit_button = st.form_submit_button('Delete')
+
+    if product_id_str:
+      product_id = int(product_id_str)
+    else:
+       product_id = product_id_str
+
+    if submit_button:
+      logger.log(logging.INFO, 'Product Details Updated')
+      updated_data = {
+          "id": product_id,
+
+      }
+
+      if not product_id:
+        st.error("Product ID is required.")
+      elif product_id not in product_ids:
+        st.error("Product ID does not exist for your store.")
+      else:
+        response = requests.delete('http://api:4000/s/stores/1/products', json=updated_data)
+        if response.status_code == 200:
+          st.success("Product Successfully Deleted")
+        else:
+          st.error(f"Failed to delete product: {response.text}")
+
 
 
 

@@ -93,6 +93,19 @@ def update_product_detail(store_id):
     db.get_db().commit()
     return 'product details updated'
 
+# Delete a product
+@stores.route('/stores/<store_id>/products', methods=['DELETE'])
+def delete_product_detail(store_id):
+    current_app.logger.info('store_routes.py: DELETE /stores/<store_id>/products')
+    product_info = request.json
+    product_id = product_info['id']
+    
+    query = 'DELETE from product WHERE store_id = {0} and id = {1}'.format(store_id, product_id)
+  
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+    return 'product deleted'
 # Add a new product to a particular store
 #
 @stores.route('/stores/<store_id>/products', methods=['POST'])
