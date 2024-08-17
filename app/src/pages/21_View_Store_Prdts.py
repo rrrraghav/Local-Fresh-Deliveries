@@ -29,10 +29,10 @@ for product in data:
 st.write('Select a product to view its details:')
 
 for product in data:
-    current_product_name = product['name']
+    current_product_name = product['p_name']
     current_product_id = product['id']
 
-    if st.button("{0}".format(product["name"]) ):
+    if st.button("{0}".format(product["p_name"]) ):
        product_detail = {}
        product_detail = requests.get('http://api:4000/s/stores/1/products/{0}'.format(current_product_id)).json()
        st.dataframe(product_detail)
