@@ -29,6 +29,8 @@ with st.form('Time fulfilled'):
         data = {
             "time_fulfilled": tf.strftime('%H:%M:%S')
         }
-        st.write(data)
-        requests.put(url, json=data)
-
+        response = requests.put(url, json=data)
+        if response.status_code == 200:
+            st.success("Order successfully updated")
+        else:
+            st.error("Failed to update order")
