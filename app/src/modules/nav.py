@@ -9,16 +9,6 @@ def HomeNav():
 def AboutPageNav():
     st.sidebar.page_link("pages/40_About.py", label="About", icon="🧠")
 
-#### ------------------------ Examples for Role of customer ------------------------
-def PolStratAdvHomeNav():
-    st.sidebar.page_link("pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon='👤')
-
-def WorldBankVizNav():
-    st.sidebar.page_link("pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon='🏦')
-
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon='🗺️')
-
 '''
 LOCAL FRESH PAGES:
 '''
@@ -30,7 +20,7 @@ def CustomerCreateOrderNav():
 def CustomerViewOrdersNav():
     st.sidebar.page_link("pages/43_View_Orders.py", label="Orders", icon='📜')
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
+## ------------------------ Examples for Role of Analyst ------------------------
 def StoreData():
     st.sidebar.page_link("pages/11_Store_Data.py", label="Store Data", icon='🏢')
 
@@ -87,21 +77,12 @@ def SideBarLinks(show_home=True):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
-        # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state['role'] == 'pol_strat_advisor':
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
-
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state['role'] == 'analyst':
             StoreData()
             CustData()
             UpdateData()
         
-        # If the user is an administrator, give them access to the administrator pages
-        if st.session_state['role'] == 'administrator':
-            AdminPageNav()
 
         # If the user is a driver, give them access to the driver pages
         if st.session_state['role'] == 'driver':
