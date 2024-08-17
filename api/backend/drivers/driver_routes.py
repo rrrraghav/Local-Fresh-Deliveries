@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, make_response, current_app
 import json
 from backend.db_connection import db
 from backend.ml_models.model01 import predict
+from datetime import datetime
 
 drivers = Blueprint('drivers', __name__)
 
@@ -38,7 +39,7 @@ def update_driver_info(id):
     fn = driver_info['first_name']
     ln = driver_info['last_name']
     vt = driver_info['vehicle_type']
-    query = 'update drivers set first_name = %s, last_name = %s, vehicle_type = %s \
+    query = 'update driver set first_name = %s, last_name = %s, vehicle_type = %s \
             where id = %s'
     data = (fn, ln, vt, id)
     cursor = db.get_db().cursor()
@@ -64,10 +65,11 @@ def get_driver_orders(id):
 def update_order_info(id, order_id):
     order_info = request.json
     time_fulfilled = order_info['time_fulfilled']
+    time = datetime.strptime(time_fulfilled, '%H:%M:%S')
     query = 'update orders \
         set time_fulfilled = %s \
             where id = %s and driver_id = %s'
-    data = (time_fulfilled, order_id, id)
+    data = (time, order_id, id)
     cursor = db.get_db().cursor()
     r = cursor.execute(query, data)
     db.get_db().commit()
