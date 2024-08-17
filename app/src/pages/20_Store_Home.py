@@ -19,4 +19,4 @@ if st.button('View Your Current Products',
 if st.button('Add a New Product', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_ML_Model_Mgmt.py')
+  st.switch_page('pages/22_Add_Product.py')
