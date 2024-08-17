@@ -41,4 +41,8 @@ with st.form("Update info"):
         data['first_name'] = fn
         data['last_name'] = ln
         data['vehicle_type'] = vt
-        requests.put(url, json=data)
+        response = requests.put(url, json=data)
+        if response.status_code == 200:
+            st.success("Your information has been updated!")
+        else:
+            st.error("Failed to update your information")
