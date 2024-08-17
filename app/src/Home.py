@@ -77,12 +77,14 @@ if st.button('Act as Max, a Fisherman',
     logger.info('Logging in as store')
     st.switch_page('pages/20_Store_Home.py')
 
-if st.button('Act as Sally, a Delivery Driver', 
+if st.button('Act as Rooney, a Delivery Driver', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'driver'
-    st.session_state['first_name'] = 'Sally'
+    st.session_state['first_name'] = 'Rooney'
+    st.session_state['driver_id'] = 1
+    st.session_state['order_id'] = 30
     logger.info('Logging in as driver')
     st.switch_page('pages/30_Driver_Home.py')
 

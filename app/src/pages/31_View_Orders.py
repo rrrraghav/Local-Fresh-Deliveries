@@ -4,7 +4,6 @@ logger = logging.getLogger(__name__)
 import streamlit as st
 from modules.nav import SideBarLinks
 import requests
-import urllib.parse
 
 st.set_page_config(layout = 'wide')
 
@@ -13,9 +12,12 @@ SideBarLinks()
 
 st.title(f"View your orders, {st.session_state['first_name']}.")
 
-url = st.query_params('url')
-parsed_url = urllib.parse.urlparse(url)
-id = parsed_url.path.split('/')[-1]
+driver_id = st.session_state['driver_id']
 
-response = requests.get(f'http://api:4000/d/driver/{id}/orders').json()
-st.dataframe(response)
+url = f'http://api:4000/d/drivers/{driver_id}/orders'
+
+try:
+    order = requests.get(url).json()
+    st.dataframe(order)
+except:
+    st.error("Failed to retrieve orders")

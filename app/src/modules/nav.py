@@ -58,6 +58,9 @@ def CompletedDeliveryNav():
 def ViewOrderCostNav():
     st.sidebar.page_link("pages/33_View_Order_Cost.py", label="View an order's cost", icon='🖥️')
 
+def DriverProfileNav():
+    st.sidebar.page_link("pages/34_Driver_Profile.py", label="View your profile", icon='🖥️')
+
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=True):
     """
@@ -101,6 +104,7 @@ def SideBarLinks(show_home=True):
             ViewOrdersNav()
             CompletedDeliveryNav()
             ViewOrderCostNav()
+            DriverProfileNav()
 
         if st.session_state['role'] == 'customer':
             CustomerHomeNav()
