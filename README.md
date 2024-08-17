@@ -27,4 +27,5 @@ MYSQL_ROOT_PASSWORD=[password here]
 3. Run the Docker containers and go to 'localhost:8501'
 
 ## Video Overview
- 
+
+https://www.youtube.com/watch?v=1zpEw-VgLPw
