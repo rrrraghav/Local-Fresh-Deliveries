@@ -48,7 +48,7 @@ def get_store(store_id):
 def get_store_products(store_id):
     current_app.logger.info('GET /stores/<store_ID>/products route')
     cursor = db.get_db().cursor()
-    cursor.execute('SELECT p.name as p_name, p.units_in_stock, p.price, c.name as c_name \
+    cursor.execute('SELECT p.id, p.name as p_name, p.units_in_stock, p.price, c.name as c_name \
     FROM product p JOIN category c ON p.category_id = c.id \
     JOIN store s ON p.store_id = s.id \
     WHERE s.id = {0} \

@@ -25,10 +25,10 @@ LOCAL FRESH PAGES:
 def CustomerHomeNav():
     st.sidebar.page_link("pages/40_Customer_Home.py", label="Home", icon='😛')
 def CustomerCreateOrderNav():
-    st.sidebar.page_link("pages/41_View_Stores.py", label="View Stores", icon='🏪')
+    st.sidebar.page_link("pages/41_View_Stores.py", label="Stores", icon='🏪')
 
 def CustomerViewOrdersNav():
-    st.sidebar.page_link("pages/43_View_Orders.py", label="View Orders", icon='📜')
+    st.sidebar.page_link("pages/43_View_Orders.py", label="Orders", icon='📜')
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
 def ApiTestNav():

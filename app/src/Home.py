@@ -56,7 +56,9 @@ if st.button("Act as Steve, a Customer",
     st.session_state['customer_id'] = 1 # Sample insert Steve persona id
     # Variables to support order processing
     st.session_state['has_order'] = False 
-    st.session_state['current_order_id'] = -1; # starts with no order
+
+    st.session_state['current_order_id'] = -2; # starts with no order
+    st.session_state['order_button_id'] = 0
     
     logger.info("Logging in as Customer")
     st.switch_page('pages/40_Customer_Home.py')

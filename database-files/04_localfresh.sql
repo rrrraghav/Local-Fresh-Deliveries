@@ -44,7 +44,7 @@ create table if not exists driver (
 create table if not exists orders (
   id integer auto_increment,
   time_created datetime default current_timestamp,
-  time_fulfilled datetime on update current_timestamp,
+  time_fulfilled datetime , # shouldn't be fulfilled on update
   pickup_address varchar(255) not null,
   delivery_address varchar(255) not null,
   customer_id integer not null,
@@ -109,7 +109,7 @@ create table if not exists orders_product (
   product_id integer,
   quantity integer not null,
   primary key (orders_id, product_id),
-  foreign key (orders_id) references orders(id) on update restrict on delete restrict,
+  foreign key (orders_id) references orders(id) on update cascade on delete restrict,
   foreign key (product_id) references product(id) on update cascade on delete restrict
 );
 
