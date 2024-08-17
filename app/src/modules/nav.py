@@ -31,14 +31,14 @@ def CustomerCreateOrderNav():
 # TODO: Store & Driver Homepages 
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon='🛜')
+def StoreData():
+    st.sidebar.page_link("pages/11_Store_Data.py", label="Store Data", icon='🏢')
 
-def PredictionNav():
-    st.sidebar.page_link("pages/11_Prediction.py", label="Regression Prediction", icon='📈')
+def CustData():
+    st.sidebar.page_link("pages/12_Customer_Data.py", label="Customer Data", icon='📈')
 
-def ClassificationNav():
-    st.sidebar.page_link("pages/13_Classification.py", label="Classification Demo", icon='🌺')
+def UpdateData():
+    st.sidebar.page_link("pages/13_Update_Data.py", label="Update Data", icon='🖥️')
 
 #### ------------------------ Store Role ------------------------
 def AdminPageNav():
@@ -86,10 +86,10 @@ def SideBarLinks(show_home=True):
             MapDemoNav()
 
         # If the user role is usaid worker, show the Api Testing page
-        if st.session_state['role'] == 'usaid_worker':
-            PredictionNav()
-            ApiTestNav() 
-            ClassificationNav()
+        if st.session_state['role'] == 'analyst':
+            StoreData()
+            CustData()
+            UpdateData()
         
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state['role'] == 'administrator':

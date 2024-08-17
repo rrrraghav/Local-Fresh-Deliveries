@@ -54,6 +54,21 @@ def get_store_orders(analyst_id, store_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# Get a specific store's order data Josh-1
+@analyst.route('/analyst/<analyst_id>/stores', methods=['GET'])
+def get_stores(analyst_id):
+    current_app.logger.info(f'analyst_routes.py: GET /analyst/<analyst_id>/stores')
+    cursor = db.get_db().cursor()
+    cursor.execute('select s.id, s.name, s.phone, sa.address, se.email \
+                    from store s \
+                    left join store_addresses sa ON s.id = sa.id \
+                    left join store_emails se ON s.id = se.id')
+    theData = cursor.fetchall()
+    the_response = make_response(theData)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # Get all customers information Josh-4
 @analyst.route('/analyst/<analyst_id>/customers', methods=['GET'])
 def get_customers(analyst_id):

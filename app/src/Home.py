@@ -58,12 +58,13 @@ if st.button("Act as Steve, a Customer",
     logger.info("Logging in as Customer")
     st.switch_page('pages/40_Customer_Home.py')
 
-if st.button('Act as Josh, a Data Analyst', 
+if st.button('Act as Milly, a Data Analyst', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'analyst'
-    st.session_state['first_name'] = 'Josh'
+    st.session_state['first_name'] = 'Milly'
+    st.session_state['id'] = 1
     logger.info('Logging in as analyst')
     st.switch_page('pages/10_Analyst_Home.py')
 
