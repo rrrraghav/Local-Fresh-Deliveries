@@ -3,7 +3,6 @@ import json
 import logging
 logger = logging.getLogger(__name__)
 from backend.db_connection import db
-from backend.ml_models.model01 import predict
 
 
 customer = Blueprint('customer', __name__)
