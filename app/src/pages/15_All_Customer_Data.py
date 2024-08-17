@@ -12,10 +12,6 @@ st.title("Local Fresh Customer Data")
 st.write('')
 st.write('### Retrieve and Analyze Customer Data')
 
-st.title("Local Fresh Customer Data")
-st.write('')
-st.write('### Retrieve and Analyze Customer Data')
-
 def get_customer_data():
     response = requests.get('http://api:4000/a/analyst/1/customers')
     return pd.DataFrame(response.json())
