@@ -41,9 +41,14 @@ def UpdateData():
     st.sidebar.page_link("pages/13_Update_Data.py", label="Update Data", icon='🖥️')
 
 #### ------------------------ Store Role ------------------------
-def AdminPageNav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon='🖥️')
-    st.sidebar.page_link("pages/21_ML_Model_Mgmt.py", label='ML Model Management', icon='🏢')
+def StoreHomeNav():
+    st.sidebar.page_link("pages/20_Store_Home.py", label="Store Owner Home", icon='🖥️')
+
+def ViewProdsNav():
+    st.sidebar.page_link("pages/21_View_Store_Prdts.py", label='View/Update Products', icon='🖥️')
+            
+def AddProdNav():
+    st.sidebar.page_link("pages/22_Add_Product.py", label='Add Products', icon='🖥️')
 
 #### ------------------------ Driver Role ------------------------
 def DriverHomeNav():
@@ -108,6 +113,12 @@ def SideBarLinks(show_home=True):
 
         if st.session_state['role'] == 'customer':
             CustomerHomeNav()
+
+        # If the user is a store owners, give them access to the driver pages
+        if st.session_state['role'] == 'store':
+            StoreHomeNav()
+            ViewProdsNav()
+            AddProdNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
