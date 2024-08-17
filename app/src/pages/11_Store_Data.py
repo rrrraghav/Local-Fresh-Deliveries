@@ -7,7 +7,6 @@ import requests
 
 st.set_page_config(layout = 'wide')
 
-# Display the appropriate sidebar links for the role of the logged in user
 SideBarLinks()
 
 st.title('Local Stores Order Data')
@@ -20,7 +19,7 @@ seen_store_names = set()
 
 def show_orders(store_id, store_name):
     global clicked
-    clicked = not clicked  # Toggle clicked state on each function call
+    clicked = not clicked 
     
     if clicked:
         st.write(f'Orders at {store_name}')

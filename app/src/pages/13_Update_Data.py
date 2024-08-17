@@ -14,7 +14,6 @@ st.title("Update Driver and Store Information")
 st.write('')
 st.write('### Update Driver Information')
 
-# Driver update section
 driver_id = st.text_input("Enter Driver ID:")
 first_name = st.text_input("Enter Driver's First Name:")
 last_name = st.text_input("Enter Driver's Last Name:")
@@ -41,7 +40,6 @@ if st.button("Update Driver"):
 st.write('---')
 st.write('### Update Store Information')
 
-# Store update section
 store_id = st.text_input("Enter Store ID:")
 store_name = st.text_input("Enter Store Name:")
 store_phone = st.text_input("Enter Store Phone:")
