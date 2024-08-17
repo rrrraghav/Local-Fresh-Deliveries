@@ -28,4 +28,4 @@ MYSQL_ROOT_PASSWORD=[password here]
 
 ## Video Overview
 
-https://www.youtube.com/watch?v=1zpEw-VgLPw
+https://youtu.be/561Yyxzvfp8
